@@ -1,0 +1,127 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: ClassPass
+providerId: classpass
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Fitness
+- Wellness
+- Class Booking
+- Marketplace
+- Plans
+description: >-
+  ClassPass has two distinct, publicly described pricing models rather than
+  one API price sheet. On the consumer side, members buy a monthly credit
+  subscription (credits redeemed for classes/experiences, with dynamic,
+  demand-based credit pricing per class via SmartRate) and tier/price varies
+  by home market and by acquisition channel (direct consumer signup vs.
+  employer/health-plan-sponsored access). On the studio/partner side there is
+  no published price list at all: listing on ClassPass and connecting the
+  Inventory API integration carries no upfront cost, and studios are paid via
+  Tipalti against a confidential, individually negotiated rate floor per
+  class/reservation, which SmartRate can raise above the floor based on
+  demand. No API usage fees, rate-limit tiers, or metered API pricing are
+  published for the partner Inventory API itself - only Terms of Use gating
+  access.
+notes: >-
+  Consumer credit/price figures below are illustrative snapshots gathered
+  from secondary sources (classpass.com/plans returned HTTP 403 to an
+  unauthenticated fetch) and vary by city/market, promotional status, and
+  distribution channel (direct vs. employer/health-plan sponsored); verify
+  current figures on classpass.com/plans directly during reconciliation.
+sources:
+- https://classpass.com/plans
+- https://classpass.com/blog/classpass-myth-busters-credits-and-pricing/
+- https://jhmbhealthconnect.com/new-plans-pricing-for-classpass-in-2026/
+- https://classpass.com/partners/blog/classpass-payouts-pricing-policies-rates
+- https://classpass.com/afterclass/what-is-smartrate/
+plans:
+- id: classpass-consumer-credits
+  name: Consumer Credit Subscription
+  type: tiered
+  description: >-
+    Monthly subscription priced by number of credits included; credits are
+    spent on classes/experiences at a per-class credit cost that floats in
+    real time via SmartRate (popularity, time until class, fill rate).
+    Unused credits can roll over up to the size of the following month's
+    plan. Figures below are a general-market snapshot; exact tiers and
+    prices vary by city.
+  entries:
+  - label: Entry tier (general market, illustrative)
+    name: entry_tier
+    type: flat
+    metric: credits
+    limit: 8
+    timeFrame: month
+    geo: varies_by_market
+    unit: 1
+    price: "~$19/month for 8 credits (illustrative; varies by market)"
+    userMultiplied: false
+  - label: Standard/default tier (general market, illustrative)
+    name: standard_tier
+    type: flat
+    metric: credits
+    limit: 48
+    timeFrame: month
+    geo: varies_by_market
+    unit: 1
+    price: "~$99/month for 48 credits (illustrative default post-trial tier; varies by market)"
+    userMultiplied: false
+  - label: Top tier (general market, illustrative)
+    name: top_tier
+    type: flat
+    metric: credits
+    limit: 80
+    timeFrame: month
+    geo: varies_by_market
+    unit: 1
+    price: "~$159/month for 80 credits (illustrative; varies by market)"
+    userMultiplied: false
+  - label: Employer/health-plan sponsored tiers (2026 rate card example)
+    name: sponsored_tiers
+    type: flat
+    metric: credits
+    limit: -1
+    timeFrame: month
+    geo: US
+    unit: 1
+    price: "Example sponsored rate card: 11 credits/$12, 25/$37, 42/$67, 88/$147, 110/$187 per month (channel-specific, not the general consumer price)"
+    userMultiplied: false
+  elements:
+  - name: Class Booking
+  - name: SmartRate Dynamic Credit Pricing
+  - name: Credit Rollover
+- id: classpass-studio-partner
+  name: Studio / Partner Integration
+  type: revenue-share
+  description: >-
+    No upfront or subscription cost for a studio to list on ClassPass or
+    connect the Inventory API integration. ClassPass pays studios via
+    Tipalti against a confidential, individually negotiated rate floor per
+    qualifying reservation; SmartRate can raise the effective payout above
+    the floor based on real-time demand, class popularity, and booking
+    proximity to start time. No metered API call pricing, rate-limit tiers,
+    or partner subscription fee is published - access is gated by a
+    partner-application and API Access Terms of Use rather than by a price
+    sheet.
+  entries:
+  - label: Inventory API / Listing
+    name: inventory_api_listing
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: "$0 upfront; revenue-share via confidential negotiated rate floor + SmartRate, paid out via Tipalti"
+    userMultiplied: false
+  elements:
+  - name: ClassPass Inventory API
+  - name: SmartRate (dynamic payout optimization)
+  - name: SmartSpot (inventory placement)
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

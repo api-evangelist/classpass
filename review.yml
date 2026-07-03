@@ -1,0 +1,124 @@
+aid: classpass
+name: ClassPass
+review:
+  question: Does ClassPass expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-03'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. ClassPass has no publicly documented
+    API surface of any kind to model - its partner "ClassPass Inventory
+    API" and partner developer portal (developers.classpass.com) are
+    entirely gated behind an approved-partner Auth0 login. There is no
+    public REST reference, and no evidence of a public WebSocket, SSE, or
+    other server-push transport on any ClassPass surface, consumer-facing
+    or partner-facing.
+findings:
+  summary: |
+    ClassPass does not publish a documented public WebSocket API - and,
+    more fundamentally, does not publish any public, unauthenticated API
+    reference at all. ClassPass runs a named partner integration product,
+    the "ClassPass Inventory API," reachable at
+    developers.classpass.com/specInfo, through which studios and their
+    scheduling/booking software (100+ supported platforms) exchange class
+    schedules, availability, pricing, bookings, and cancellations with
+    ClassPass. That page, and the entire developer portal around it, is an
+    Auth0-gated Next.js application: fetching it without authenticating
+    returns only an empty client-side app shell (title "ClassPass
+    Developers", empty Redux state, a login redirect to
+    core-portal.auth0.com). No endpoint paths, payload schemas, base URL,
+    or transport details are visible to an unauthenticated reader, and no
+    WebSocket (ws:// or wss://) endpoint is referenced anywhere in
+    ClassPass's public partner-marketing or help-center material describing
+    the integration. ClassPass's own Help Center confirms API access is
+    governed by a dedicated "API Access Terms of Use," consistent with a
+    partner-application-gated model rather than an open developer program.
+  openSource: |
+    No open-source SDKs, client libraries, or API code were found published
+    by ClassPass for its Inventory/partner API. ClassPass's public GitHub
+    organization (github.com/classpass) contains only internal engineering
+    tooling (GitHub Actions, mobile app infrastructure, CI utilities) - no
+    API client, OpenAPI file, or Postman collection for the partner
+    integration surface.
+  transports:
+    - protocol: REST
+      scheme: https
+      documented: false
+      note: A "ClassPass Inventory API" exists by name and is described in
+        partner-marketing terms (schedules, availability, pricing, bookings,
+        cancellations pushed/pulled roughly every 30 minutes on at least one
+        partner platform), but its actual REST endpoint paths, base URL, and
+        payload schemas are gated behind an Auth0 partner login and are not
+        publicly documented.
+    - protocol: Webhook
+      scheme: https
+      documented: false
+      note: Partner-platform help centers describe bookings/cancellations
+        flowing "directly into the studio's system," consistent with either
+        polling or webhook delivery, but ClassPass does not publicly specify
+        which, nor document webhook payloads or signing.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is referenced anywhere in ClassPass's
+        public developer-portal shell, partner-marketing pages, or help
+        center as of the review date.
+  endpointsConfirmedRest: []
+sources:
+  - url: https://developers.classpass.com/
+    type: Documentation
+    note: ClassPass Developers portal. Served page is an empty Next.js app
+      shell requiring Auth0 login (core-portal.auth0.com, audience
+      https://developers.classpass.com) before any API content loads.
+  - url: https://developers.classpass.com/specInfo
+    type: APIReference
+    note: Page titled "ClassPass Inventory API." Client-side Redux state
+      declares entities cpToken, integratorSettings, validationTests,
+      runTest, and specDoc - evidence of token issuance, per-integrator
+      settings, a certification test suite, and a gated spec document - but
+      no spec content is visible without authenticating.
+  - url: https://help.classpass.com/hc/en-us/articles/360061293531-What-is-ClassPass-s-API-Access-Terms-of-Use
+    type: Documentation
+    note: Confirms ClassPass publishes a dedicated API Access Terms of Use,
+      consistent with gated, partner-application access rather than a public
+      self-serve developer program. Article body returned HTTP 403 to an
+      unauthenticated fetch.
+  - url: https://classpass.com/partners/classpass-booking-integrations
+    type: Documentation
+    note: Partner-marketing page listing 100+ supported scheduling/booking
+      systems for the Inventory API integration. Returned HTTP 403 to an
+      unauthenticated fetch; content summarized via search-result excerpts.
+  - url: https://support.mindbodyonline.com/s/article/206881857-Class-Pass-activation-API-integration
+    type: Documentation
+    note: A ClassPass integration partner's own help center describing
+      activation of the "Class Pass" API integration for schedule/booking
+      sync.
+  - url: https://github.com/classpass
+    type: SourceCode
+    note: Public GitHub organization contains internal engineering/CI
+      tooling only - no public API client, OpenAPI file, or Postman
+      collection for the partner Inventory API.
+  - url: https://classpass.com/partners/blog/classpass-payouts-pricing-policies-rates
+    type: Documentation
+    note: Describes the studio payout model (confidential negotiated rate
+      floor, SmartRate dynamic pricing, no upfront cost to list, payouts via
+      Tipalti) referenced in plans/classpass-plans-pricing.yml.
+  - url: https://classpass.com/plans
+    type: Documentation
+    note: Consumer subscription plans page; returned HTTP 403 to an
+      unauthenticated fetch, so consumer pricing here is sourced from
+      independent secondary summaries (search-result excerpts) rather than
+      the primary page.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists, and no public REST surface exists
+    either - the entire ClassPass partner API is gated behind an
+    Auth0-authenticated developer portal. No AsyncAPI, OpenAPI, or Postman
+    artifact was fabricated. apis.yml documents the two verifiable,
+    independently-observed facts (the named "ClassPass Inventory API"
+    product and the shape of its certification/token portal), each marked
+    endpointsModeled: false, and points to the gated portal and Terms of Use
+    rather than inventing endpoint paths.
