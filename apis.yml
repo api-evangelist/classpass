@@ -82,6 +82,8 @@ apis:
     partner account.
   endpointsModeled: false
 common:
+- type: DomainSecurity
+  url: security/classpass-domain-security.yml
 - type: Website
   url: https://classpass.com
 - type: LinkedIn
