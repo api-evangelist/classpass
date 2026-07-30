@@ -15,7 +15,19 @@ description: ClassPass is a fitness and wellness marketplace that lets consumers
   ClassPass does not publish a public, unauthenticated API reference,
   OpenAPI file, or Postman collection. ClassPass is now part of Playlist, the
   group formed together with Mindbody and Booker.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Paid
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/classpass.png
 tags:
 - Fitness
 - Wellness
