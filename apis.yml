@@ -73,6 +73,11 @@ apis:
   name: ClassPass Partner Certification & Token Portal
   tags:
   - Partner Portal
+  - Authentication
+  - Certification
+  - Sandbox
+  tags_raw:
+  - Partner Portal
   - OAuth
   - Certification
   - Sandbox
