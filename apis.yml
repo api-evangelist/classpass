@@ -44,6 +44,15 @@ tags:
 - Wellness
 - Class Booking
 - Marketplace
+- Studio
+- Gyms
+- Scheduling
+- Partner API
+tags_raw:
+- Fitness
+- Wellness
+- Class Booking
+- Marketplace
 - Studios
 - Gyms
 - Scheduling
@@ -55,6 +64,12 @@ apis:
 - aid: classpass:classpass-inventory-api
   name: ClassPass Inventory API
   tags:
+  - Inventory
+  - Classes
+  - Schedule
+  - Availability
+  - Booking
+  tags_raw:
   - Inventory
   - Classes
   - Schedules
