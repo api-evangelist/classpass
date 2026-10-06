@@ -58,7 +58,7 @@ tags_raw:
 - Scheduling
 - Partner API
 created: '2026-07-03'
-modified: '2026-07-03'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: classpass:classpass-inventory-api
@@ -125,6 +125,10 @@ apis:
     partner account.
   endpointsModeled: false
 common:
+- url: https://classpass.com/blog/
+  type: Blog
+- url: https://classpass.com/blog/feed/
+  type: BlogRSS
 - type: DomainSecurity
   url: security/classpass-domain-security.yml
 - type: Website
