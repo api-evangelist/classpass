@@ -130,3 +130,29 @@ plans:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - revenue-share
+  - tiered
+  units:
+  - credit
+  - negotiated
+  plans:
+  - name: Consumer Credit Subscription
+    access: other
+    model: tiered
+    model_how: stated
+    units:
+    - credit
+    periods:
+    - month
+  - name: Studio / Partner Integration
+    access: partner
+    model: revenue-share
+    model_how: stated
+    units:
+    - negotiated
+    periods:
+    - month
