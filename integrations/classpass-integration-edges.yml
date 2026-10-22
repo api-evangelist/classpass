@@ -2,6 +2,7 @@ generated: '2026-10-14'
 method: searched
 checked:
 - toast/integrations/toast-integration-edges.yml
+- wix/integrations/wix-integration-edges.yml
 source:
 - toast/integrations/toast-integration-edges.yml
 edges:
@@ -22,3 +23,22 @@ edges:
   detected: '2026-10-14'
   detected_by: mirror-platform-listings.py
   category: Online Ordering
+- partner_name: Wix (own)
+  partner: wix
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.wix.com/app-market/developer/classpass
+  mirror_of: wix/integrations/wix-integration-edges.yml
+  apps:
+  - ClassPass
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Bookings
+  publisher_verified:
+  - Verified by Wix
