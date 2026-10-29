@@ -1,4 +1,4 @@
-# ClassPass (classpass)
+# ClassPass
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,86 +66,89 @@
 
 ClassPass is a fitness and wellness marketplace that lets consumers book classes, gym visits, and spa/wellness experiences across a network of studios in a single app using a monthly credit subscription. On the supply side, ClassPass runs a partner integration platform - centered on a named "ClassPass Inventory API" - that lets studios and their scheduling/booking software (100+ platforms, including Mindbody, Vagaro, Zen Planner, and Eversports Manager) push live class schedules, availability, and pricing to ClassPass and receive bookings and cancellations back. The partner developer portal at developers.classpass.com requires an approved partner login (Auth0) to view the API specification document and run certification tests; ClassPass does not publish a public, unauthenticated API reference, OpenAPI file, or Postman collection. ClassPass is now part of Playlist, the group formed together with Mindbody and Booker.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/classpass/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/classpass/refs/heads/main/apis.yml)
+**Areas:** Fitness · Wellness · Class Booking · Marketplace · Studio · Gyms · Scheduling · Partner API
 
-## Access model - honest summary
+## ClassPass on APIs.io
 
-ClassPass does **not** have a public, self-serve developer API. There is a real developer/partner portal (`developers.classpass.com`), and a page on it titled "ClassPass Inventory API" (`/specInfo`), but the entire portal is an Auth0-gated Next.js application - the page's initial HTML/JSON ships with empty state and a login redirect (`AUTH0_DOMAIN: core-portal.auth0.com`); no endpoint list, request/response schema, or OpenAPI file is visible without an approved partner account. A separate ClassPass Help Center article, ["What is ClassPass's API Access Terms of Use?"](https://help.classpass.com/hc/en-us/articles/360061293531-What-is-ClassPass-s-API-Access-Terms-of-Use), confirms API access is governed by its own terms, consistent with a gated, partner-application model rather than an open developer program.
+Everything profiled for ClassPass is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/classpass/](https://apis.io/providers/classpass/)** — or go straight to one of the APIs or properties below.
 
-What ClassPass does document publicly, through partner-marketing pages and its integration partners' own help centers, is the *shape* of the integration:
+### APIs (2)
 
-- Studios connect their scheduling/booking software (100+ supported platforms) to ClassPass.
-- The studio's system pushes class schedules, real-time availability, and pricing to ClassPass.
-- ClassPass pushes bookings and cancellations back to the studio's system (observed by at least one partner platform to reconcile on a roughly 30-minute cycle).
-- "SmartTools" (SmartRate for dynamic credit pricing, SmartSpot for inventory/placement) sit on top of this same data pipe to help studios optimize fill rate and payout.
-- There is no upfront cost for a studio to list on ClassPass; ClassPass pays studios via Tipalti against a confidential, partner-negotiated rate floor, adjusted upward in real time by SmartRate.
+- [ClassPass Inventory API](https://apis.io/apis/classpass/classpass-inventory-api/) — ClassPass's named partner integration API for studios and their scheduling/booking software. Per ClassPass partner-marketing pages and integration-partner…
+- [ClassPass Partner Certification & Token Portal](https://apis.io/apis/classpass/classpass-partner-certification-portal/) — The client-side application shell served at developers.classpass.com (inspectable without authenticating) declares Redux state entities named cpToken,…
 
-No endpoint paths, base URLs, authentication flow details, or payload schemas are published outside the gated portal, so none are fabricated here. The two entries under `apis` in `apis.yml` document the two things that are independently verifiable (the named "ClassPass Inventory API" product and the observable shape of the gating/certification portal itself), each explicitly flagged `endpointsModeled: false`.
+### Published properties
 
-## Tags
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- Fitness
-- Wellness
-- Class Booking
-- Marketplace
-- Studios
-- Gyms
-- Scheduling
-- Partner API
+#### Security (1)
 
-## Timestamps
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Created:** 2026-07-03
-- **Modified:** 2026-07-03
+- [Classpass Domain Security](https://apis.io/security/classpass/classpass-domain-security/)
 
-## APIs
+#### Plans and pricing (1)
 
-### ClassPass Inventory API
+Published plans, tiers and prices.
 
-ClassPass's named partner integration API for studios and their scheduling/booking software. Studios push class schedules, real-time availability, and pricing to ClassPass, and receive bookings and cancellations back. The API's own reference document lives behind an Auth0-gated partner login; no endpoint paths are modeled here (`endpointsModeled: false`).
+- [Classpass Plans Pricing](https://apis.io/plans/classpass/classpass-plans-pricing/)
 
-- **Human URL:** [https://developers.classpass.com/specInfo](https://developers.classpass.com/specInfo)
+## Where to find this API
 
-#### Tags
-
-- Inventory
-- Classes
-- Schedules
-- Availability
-- Bookings
-
-#### Properties
-
-- [Documentation](https://developers.classpass.com/)
-- [API Reference](https://developers.classpass.com/specInfo) (Auth0 login required to view spec content)
-
-### ClassPass Partner Certification & Token Portal
-
-The client-side application shell served at `developers.classpass.com` declares Redux state entities named `cpToken`, `integratorSettings`, `specDoc`, `validationTests`, and `runTest` - evidence the portal issues partner API tokens, stores per-integrator settings, serves the gated spec document, and runs an automated certification test suite integrations must pass before going live. No further technical detail is publicly visible without an approved partner account.
-
-- **Human URL:** [https://developers.classpass.com/](https://developers.classpass.com/)
-
-#### Tags
-
-- Partner Portal
-- OAuth
-- Certification
-- Sandbox
-
-#### Properties
-
-- [Documentation](https://developers.classpass.com/)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://classpass.com)
-- [LinkedIn](https://www.linkedin.com/company/classpass)
-- [Developer Portal](https://developers.classpass.com/)
-- [Help Center - API Access Terms of Use](https://help.classpass.com/hc/en-us/articles/360061293531-What-is-ClassPass-s-API-Access-Terms-of-Use)
-- [Booking Integrations](https://classpass.com/partners/classpass-booking-integrations)
-- [Plans](plans/classpass-plans-pricing.yml)
+- [Blog](https://classpass.com/blog/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 12.1** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 33.3 |
+| Access clarity | 5.3 |
+
+**Agent readiness 0.0** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/classpass/](https://apis.io/providers/classpass/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for ClassPass: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/classpass/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
